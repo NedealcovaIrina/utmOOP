@@ -1,5 +1,7 @@
 package org.utm.labthree.application;
 
+import org.utm.labthree.services.FileGitDetector;
+
 import java.util.Scanner;
 
 public class ApplicationBehaviour {
@@ -11,17 +13,22 @@ public class ApplicationBehaviour {
     }
 
     public void run() {
+        var detector = new FileGitDetector(folderPath);
+
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Enter command (commit, info, status, exit):");
             String command = scanner.nextLine();
             switch (command) {
-                case "commit" -> System.out.println("Commit:");
-                case "info" -> System.out.println("Info:");
-                case "status" -> System.out.println("Status:");
+                case "commit" -> detector.commit();
+                case "info" -> {
+                    System.out.println("Enter file name:");
+                    String fileName = scanner.nextLine();
+                    detector.info(fileName);
+                }
+                case "status" -> detector.status();
                 case "exit" -> {
                     scanner.close();
-                    System.out.println("Exit");
                     System.exit(0);
                 }
                 default -> System.out.println("Invalid command.");
