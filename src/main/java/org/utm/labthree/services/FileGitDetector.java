@@ -67,6 +67,8 @@ public class FileGitDetector extends GitDetector {
     }
 
     public void info(String fileName) {
+        var fileService = new FileService(folderPath);
+        fileService.info(fileName);
     }
 
     public void status() {
