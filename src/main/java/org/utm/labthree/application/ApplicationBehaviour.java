@@ -17,7 +17,8 @@ public class ApplicationBehaviour {
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Enter command (commit, info, status, exit):");
+            System.out.println("Сommand list (commit, info, status, exit)");
+            System.out.println("Enter command: ");
             String command = scanner.nextLine();
             switch (command) {
                 case "commit" -> detector.commit();
