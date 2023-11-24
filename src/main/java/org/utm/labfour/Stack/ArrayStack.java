@@ -1,46 +1,37 @@
 package org.utm.labfour.Stack;
 
-public class ArrayStack<T> implements InStack<T> {
-    private T[] array;
-    private int top;
-    private static final int DEFAULT_CAPACITY = 10;
+import java.util.ArrayList;
+
+public class ArrayStack<E> implements Stack<E> {
+    private ArrayList<E> stack;
 
     public ArrayStack() {
-        array = (T[]) new Object[DEFAULT_CAPACITY];
-        top = -1;
+        this.stack = new ArrayList<>();
     }
 
     @Override
-    public void push(T element) {
-        if (top == array.length - 1) {
-            throw new StackOverflowError();
-        }
-        array[++top] = element;
+    public void push(E element) {
+        stack.add(element);
     }
 
     @Override
-    public T pop() {
+    public E pop() {
         if (isEmpty()) {
-            throw new IllegalStateException("Stack is empty");
+            return null;
         }
-        return array[top--];
+        return stack.remove(stack.size() - 1);
     }
 
     @Override
-    public T peek() {
+    public E peek() {
         if (isEmpty()) {
-            throw new IllegalStateException("Stack is empty");
+            return null;
         }
-        return array[top];
+        return stack.get(stack.size() - 1);
     }
 
     @Override
     public boolean isEmpty() {
-        return top == -1;
-    }
-
-    @Override
-    public int size() {
-        return top + 1;
+        return stack.isEmpty();
     }
 }

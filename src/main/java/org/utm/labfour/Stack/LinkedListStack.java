@@ -1,48 +1,37 @@
 package org.utm.labfour.Stack;
 
-public class LinkedListStack<T> implements InStack<T> {
-    private static class Node<T> {
-        T data;
-        Node<T> next;
+import java.util.LinkedList;
 
-        Node(T data) {
-            this.data = data;
-        }
+public class LinkedListStack<E> implements Stack<E> {
+    private LinkedList<E> stack;
+
+    public LinkedListStack() {
+        this.stack = new LinkedList<>();
     }
 
-    private Node<T> top = null;
-    private int size = 0;
-
-    public void push(T item) {
-        Node<T> newNode = new Node<>(item);
-        newNode.next = top;
-        top = newNode;
-        size++;
+    @Override
+    public void push(E element) {
+        stack.addFirst(element);
     }
 
-    public T pop() {
+    @Override
+    public E pop() {
         if (isEmpty()) {
-            throw new IllegalStateException("Stack is empty");
+            return null;
         }
-        T data = top.data;
-        top = top.next;
-        size--;
-        return data;
+        return stack.removeFirst();
     }
 
-    public T peek() {
+    @Override
+    public E peek() {
         if (isEmpty()) {
-            throw new IllegalStateException("Stack is empty");
+            return null;
         }
-        return top.data;
+        return stack.getFirst();
     }
 
+    @Override
     public boolean isEmpty() {
-        return top == null;
-    }
-
-    public int size() {
-        return size;
+        return stack.isEmpty();
     }
 }
-
